@@ -15,11 +15,16 @@ export class NegociacaoController {
     let data = new Date(this.inputData.value.replace('-', ','))
     let quantidade = parseInt(this.inputQuantidade.value);
     let valor = parseFloat(this.inputValor.value);
-
     const negociacao = new Negociacao(data, quantidade, valor)
+    this.limparFormulario()
     console.log(negociacao);
-
     return true
+  }
+
+  limparFormulario(): void {
+    this.inputData.value = '';
+    this.inputQuantidade.value = '';
+    this.inputValor.value = '';
   }
 
 }
