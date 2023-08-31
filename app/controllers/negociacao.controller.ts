@@ -13,13 +13,17 @@ export class NegociacaoController {
     this.inputValor = document.querySelector('#valor');
   }
 
-  add(): boolean {
-    let data = new Date(this.inputData.value.replace('-', ','))
+  createNegociacao(): Negociacao {
+    let data = new Date(this.inputData.value.replace('-', ','));
     let quantidade = parseInt(this.inputQuantidade.value);
     let valor = parseFloat(this.inputValor.value);
-    const negociacao = new Negociacao(data, quantidade, valor)
-    this.negociacoes.add(negociacao)
-    this.limparFormulario()
+    const negociacao = new Negociacao(data, quantidade, valor);
+    return negociacao;
+  }
+
+  add(): boolean {
+    this.negociacoes.add(this.createNegociacao())
+    this.limparFormulario();
     console.log(this.negociacoes.read());
     return true
   }
