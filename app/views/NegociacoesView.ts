@@ -1,12 +1,8 @@
 import { Negociacao } from "../models/negociacao";
-import { Negociacoes } from "../models/negociacoes";
+import { Negociacoes } from "../models/negociacoes.js";
+import { View } from "./view.js";
 
-export class NegociacoesView {
-  private elemento: HTMLElement;
-
-  constructor(seletor: string) {
-    this.elemento = document.querySelector(seletor);
-  }
+export class NegociacoesView extends View<Negociacoes> {
 
   template(model: Negociacoes): string {
     return `
@@ -16,17 +12,13 @@ export class NegociacoesView {
             <th>DATA</th>
             <th>QUANTIDADE</th>
             <th>VALOR</th>
-            </tr>
+          </tr>
         </thead>
         <tbody>
           ${model.read().map(negociacao => this.negociacaoRow(negociacao)).join('')}
         </tbody>
       </table>
     `    
-  }
-
-  update(model: Negociacoes): void {
-    this.elemento.innerHTML = this.template(model);
   }
 
   negociacaoRow(negociacao: Negociacao) {
@@ -38,5 +30,4 @@ export class NegociacoesView {
       </tr>
     `
   }
-
 }
