@@ -13,16 +13,20 @@ export class NegociacaoController {
         this.negociacoesView.update(this.negociacoes);
     }
     add() {
-        this.negociacoes.add(this.createNegociacao());
-        this.cleanForm();
-        this.updateView();
+        let negociacao = this.createNegociacao();
+        if (negociacao.data.getDay() !== 0 && negociacao.data.getDay() !== 6) {
+            this.negociacoes.add(negociacao);
+            this.cleanForm();
+            this.updateView();
+            return true;
+        }
+        this.alertView.update('O produto não pode ser cadastrado, pois a data não é valida, o mesmo deve estar em um dia útil.');
     }
     createNegociacao() {
         let data = new Date(this.inputData.value.replace('-', ','));
         let quantidade = parseInt(this.inputQuantidade.value);
         let valor = parseFloat(this.inputValor.value);
-        const negociacao = new Negociacao(data, quantidade, valor);
-        return negociacao;
+        return new Negociacao(data, quantidade, valor);
     }
     cleanForm() {
         this.inputData.value = '';
