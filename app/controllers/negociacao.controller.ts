@@ -18,7 +18,13 @@ export class NegociacaoController {
     this.negociacoesView.update(this.negociacoes)
   }
 
-  createNegociacao(): Negociacao {
+  public add(): void {
+    this.negociacoes.add(this.createNegociacao())
+    this.cleanForm();
+    this.updateView();
+  }
+  
+  private createNegociacao(): Negociacao {
     let data = new Date(this.inputData.value.replace('-', ','));
     let quantidade = parseInt(this.inputQuantidade.value);
     let valor = parseFloat(this.inputValor.value);
@@ -26,18 +32,14 @@ export class NegociacaoController {
     return negociacao;
   }
 
-  add(): boolean {
-    this.negociacoes.add(this.createNegociacao())
-    this.negociacoesView.update(this.negociacoes);
-    this.cleanForm();
-    this.alertView.update('Produto adicionado com sucesso');
-    return true
-  }
-
-  cleanForm(): void {
+  private cleanForm(): void {
     this.inputData.value = '';
     this.inputQuantidade.value = '';
     this.inputValor.value = '';
   }
 
+  private updateView():void {
+    this.negociacoesView.update(this.negociacoes);
+    this.alertView.update('Produto adicionado com sucesso');
+  }
 }
