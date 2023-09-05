@@ -19,11 +19,17 @@ export class NegociacaoController {
   }
 
   public add(): void {
-    let negociacao = this.createNegociacao();
+    const negociacao = Negociacao.createNegociacao(
+      this.inputData.value, 
+      this.inputQuantidade.value, 
+      this.inputValor.value
+    );
+    
     if (!this.isWeekDay(negociacao.data)) {
       this.alertView
-        .update('O produto não pode ser cadastrado, pois a data não é valida, o mesmo deve estar em um dia útil.')
+      .update('O produto não pode ser cadastrado, pois a data não é valida, o mesmo deve estar em um dia útil.')
     }
+    
     this.negociacoes.add(negociacao);
     this.cleanForm();
     this.updateView();
@@ -31,13 +37,6 @@ export class NegociacaoController {
 
   private isWeekDay(date: Date): boolean {
     return date.getDay() !== 0 && date.getDay() !== 6
-  }
-  
-  private createNegociacao(): Negociacao {
-    let data = new Date(this.inputData.value.replace('-', ','));
-    let quantidade = parseInt(this.inputQuantidade.value);
-    let valor = parseFloat(this.inputValor.value);
-    return new Negociacao(data, quantidade, valor)
   }
 
   private cleanForm(): void {
