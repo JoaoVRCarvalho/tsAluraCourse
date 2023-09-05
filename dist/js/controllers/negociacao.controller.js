@@ -14,13 +14,16 @@ export class NegociacaoController {
     }
     add() {
         let negociacao = this.createNegociacao();
-        if (negociacao.data.getDay() !== 0 && negociacao.data.getDay() !== 6) {
-            this.negociacoes.add(negociacao);
-            this.cleanForm();
-            this.updateView();
-            return true;
+        if (!this.isWeekDay(negociacao.data)) {
+            this.alertView
+                .update('O produto não pode ser cadastrado, pois a data não é valida, o mesmo deve estar em um dia útil.');
         }
-        this.alertView.update('O produto não pode ser cadastrado, pois a data não é valida, o mesmo deve estar em um dia útil.');
+        this.negociacoes.add(negociacao);
+        this.cleanForm();
+        this.updateView();
+    }
+    isWeekDay(date) {
+        return date.getDay() !== 0 && date.getDay() !== 6;
     }
     createNegociacao() {
         let data = new Date(this.inputData.value.replace('-', ','));
