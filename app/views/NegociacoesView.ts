@@ -4,7 +4,7 @@ import { View } from "./view.js";
 
 export class NegociacoesView extends View<Negociacoes> {
 
-  template(model: Negociacoes): string {
+  protected template(model: Negociacoes): string {
     return `
       <table class="table table-hover table-bordered">
         <thead>
@@ -21,7 +21,7 @@ export class NegociacoesView extends View<Negociacoes> {
     `    
   }
 
-  negociacaoRow(negociacao: Negociacao) {
+  private negociacaoRow(negociacao: Negociacao) {
     return `
       <tr>
         <td>${new Intl.DateTimeFormat().format(negociacao.data)}</td>
