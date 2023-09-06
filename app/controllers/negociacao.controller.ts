@@ -8,7 +8,7 @@ export class NegociacaoController {
   private inputQuantidade: HTMLInputElement
   private inputValor: HTMLInputElement;
   private negociacoes = new Negociacoes;
-  private negociacoesView = new NegociacoesView('#negociacoesView');
+  private negociacoesView = new NegociacoesView('#negociacoesView', true);
   private alertView = new AlertView('#mensagemView');
 
   constructor() {
@@ -29,7 +29,7 @@ export class NegociacaoController {
       this.alertView
       .update('O produto não pode ser cadastrado, pois a data não é valida, o mesmo deve estar em um dia útil.')
     }
-    
+
     this.negociacoes.add(negociacao);
     this.cleanForm();
     this.updateView();
