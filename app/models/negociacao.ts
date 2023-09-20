@@ -1,13 +1,12 @@
 export class Negociacao {
 
   constructor(
-    private _data: Date, // no caso de date, ela não pdoe ficar como read only, pois ela não um tipo primitivo.
+    private _data: Date,    
     public readonly quantidade: number,
     public readonly valor: number,        
   ) {}
 
   get data(): Date {
-    // como date não é um tipo primitivo, é feita está gambiarra para que se evite a mutação do valor por meio de métdodos 
     let date = new Date(this._data.getTime())
     return date
   }
@@ -21,5 +20,5 @@ export class Negociacao {
     let quantidade = parseInt(quantidadeStr);
     let valor = parseFloat(valorStr);
     return new Negociacao(data, quantidade, valor)
-  } 
+  }
 }
