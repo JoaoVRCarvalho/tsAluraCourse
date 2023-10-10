@@ -4,7 +4,10 @@ export abstract class View<T> {
   protected escape = false;
 
   constructor(seletor: string, escape?: boolean) {
-    this.element = document.querySelector(seletor);
+    if(!document.querySelector(seletor)) {
+      throw `o seletor: ${seletor} não está presente no DOM`
+    }
+    this.element = document.querySelector(seletor) as HTMLElement;
   }
 
   update(model: T): void {
