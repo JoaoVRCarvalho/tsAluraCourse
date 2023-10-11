@@ -1,3 +1,5 @@
+import { logPerformance } from "../decorators/performance.log.js";
+
 export abstract class View<T> {
 
   protected element: HTMLElement;
@@ -9,7 +11,7 @@ export abstract class View<T> {
     }
     this.element = document.querySelector(seletor) as HTMLElement;
   }
-
+  @logPerformance()
   update(model: T): void {
     let template = this.template(model);
     if (this.escape) {

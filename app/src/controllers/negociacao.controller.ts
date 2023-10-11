@@ -1,3 +1,4 @@
+import { logPerformance } from "../decorators/performance.log.js";
 import { Negociacao } from "../models/negociacao.js";
 import { Negociacoes } from "../models/negociacoes.js";
 import { NegociacoesView } from "../views/NegociacoesView.js";
@@ -17,7 +18,7 @@ export class NegociacaoController {
     this.inputValor = document.querySelector('#valor') as HTMLInputElement;
     this.negociacoesView.update(this.negociacoes)
   }
-
+  @logPerformance()
   public add(): void {
     const negociacao = Negociacao.createNegociacao(
       this.inputData.value, 
