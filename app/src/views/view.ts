@@ -3,9 +3,8 @@ import { logPerformance } from "../decorators/performance.log.js";
 export abstract class View<T> {
 
   protected element: HTMLElement;
-  protected escape = false;
 
-  constructor(seletor: string, escape?: boolean) {
+  constructor(seletor: string) {
     if(!document.querySelector(seletor)) {
       throw `o seletor: ${seletor} não está presente no DOM`
     }
@@ -13,10 +12,6 @@ export abstract class View<T> {
   }
   @logPerformance()
   update(model: T): void {
-    let template = this.template(model);
-    if (this.escape) {
-      template = template.replace(/<script>[\s\S]*?<\/script>/, '');
-    }
     this.element.innerHTML = this.template(model);
   }
 
