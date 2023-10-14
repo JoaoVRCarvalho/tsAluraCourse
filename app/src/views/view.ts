@@ -10,7 +10,7 @@ export abstract class View<T> {
     }
     this.element = document.querySelector(seletor) as HTMLElement;
   }
-  @logPerformance()
+
   update(model: T): void {
     this.element.innerHTML = this.template(model);
   }
