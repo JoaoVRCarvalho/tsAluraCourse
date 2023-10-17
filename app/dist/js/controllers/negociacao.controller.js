@@ -27,6 +27,21 @@ export class NegociacaoController {
         this.cleanForm();
         this.updateView();
     }
+    importData() {
+        fetch('http://localhost:8080/dados')
+            .then(res => res.json())
+            .then((dados) => {
+            return dados.map(dado => {
+                return new Negociacao(new Date(), dado.vezes, dado.montante);
+            });
+        })
+            .then(dayNegociacoes => {
+            dayNegociacoes.forEach(item => {
+                this.negociacoes.add(item);
+            });
+            this.negociacoesView.update(this.negociacoes);
+        });
+    }
     isWeekDay(date) {
         return date.getDay() !== 0 && date.getDay() !== 6;
     }

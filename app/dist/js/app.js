@@ -5,3 +5,10 @@ form.addEventListener('submit', event => {
     event.preventDefault();
     controller.add();
 });
+const btnImport = document.querySelector('#btn-import');
+if (btnImport) {
+    btnImport.addEventListener('click', () => {
+        console.log('clicou');
+        controller.importData();
+    });
+}
