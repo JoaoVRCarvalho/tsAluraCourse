@@ -8,7 +8,7 @@ export function escape(
   descriptor.value = function(...args: Array<any>) {
     let fnReturn = originFn.apply(this, args);
     if (typeof fnReturn === 'string') {
-      console.log('escaping...');
+      // console.log('escaping...');
       fnReturn = fnReturn
         .replace(/<script>[\s\S]*?<\/script>/, '');
     }

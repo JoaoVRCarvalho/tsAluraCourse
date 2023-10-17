@@ -8,9 +8,9 @@ export function domInjector(seletor: string) {
     let element: HTMLElement;
     const getter = function() {
       if (!element) {
-        console.log('buscando elemento')
+        // console.log('buscando elemento...')
         element = document.querySelector(seletor) as HTMLElement;
-        console.log(`element: ${element} injected at ${propertyKey}`);
+        // console.log(`element: ${element} injected at ${propertyKey}`);
       }
 
       return element;
