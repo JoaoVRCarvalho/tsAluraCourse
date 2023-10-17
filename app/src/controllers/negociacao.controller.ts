@@ -19,7 +19,7 @@ export class NegociacaoController {
   constructor() {
     this.negociacoesView.update(this.negociacoes)
   }
-  
+
   @logPerformance()
   public add(): void {
     const negociacao = Negociacao.createNegociacao(
@@ -36,6 +36,26 @@ export class NegociacaoController {
     this.negociacoes.add(negociacao);
     this.cleanForm();
     this.updateView();
+  }
+
+  public importData(): void {
+    fetch('http://localhost:8080/dados')
+      .then(res => res.json())
+      .then((dados: Array<any>) => {
+        return dados.map(dado => {
+          return new Negociacao(
+            new Date(), 
+            dado.vezes, 
+            dado.montante
+          )
+        })
+      })
+      .then(dayNegociacoes => {
+        dayNegociacoes.forEach(item => {
+          this.negociacoes.add(item);
+        });
+        this.negociacoesView.update(this.negociacoes);
+      })
   }
 
   private isWeekDay(date: Date): boolean {
