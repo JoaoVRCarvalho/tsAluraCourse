@@ -1,5 +1,3 @@
-import { logPerformance } from "../decorators/performance.log.js";
-
 export abstract class View<T> {
 
   protected element: HTMLElement;
